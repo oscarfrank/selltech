@@ -4,8 +4,16 @@
       <h2>Register</h2>
       <form @submit.prevent="registerUser">
         <div>
-          <label for="name">Name:</label>
-          <input type="text" v-model="name" required />
+          <label for="firstName">First Name:</label>
+          <input type="text" v-model="firstName" required />
+        </div>
+        <div>
+          <label for="lastName">Last Name:</label>
+          <input type="text" v-model="lastName" required />
+        </div>
+        <div>
+          <label for="username">Username:</label>
+          <input type="text" v-model="username" required />
         </div>
         <div>
           <label for="email">Email:</label>
@@ -32,8 +40,10 @@ export default {
   },
   data() {
     return {
-      name: '',
+      firstName: '',
+      lastName: '',
       email: '',
+      username: '',
       password: '',
     };
   },
@@ -42,8 +52,10 @@ export default {
       const toast = useToast();
       try {
         const { data } = await axios.post('/api/auth/register', {
-          name: this.name,
+          firstName: this.firstName,
+          lastName: this.lastName,
           email: this.email,
+          username: this.username,
           password: this.password,
         });
         localStorage.setItem('token', data.token);

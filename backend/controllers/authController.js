@@ -19,7 +19,9 @@ const authUser = async (req, res) => {
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user._id,
-      name: user.name,
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       token: generateToken(user._id),
     });
@@ -32,7 +34,7 @@ const authUser = async (req, res) => {
 // @route   POST /api/auth/register
 // @access  Public
 const registerUser = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { firstName, lastName, username, email, password } = req.body;
 
   const userExists = await User.findOne({ email });
 
@@ -41,7 +43,9 @@ const registerUser = async (req, res) => {
   }
 
   const user = await User.create({
-    name,
+    firstName,
+    lastName,
+    username,
     email,
     password: bcrypt.hashSync(password, 10),
   });
@@ -49,7 +53,9 @@ const registerUser = async (req, res) => {
   if (user) {
     res.status(201).json({
       _id: user._id,
-      name: user.name,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      username: user.username,
       email: user.email,
       token: generateToken(user._id),
     });

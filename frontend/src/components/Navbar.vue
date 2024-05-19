@@ -14,7 +14,7 @@
       <router-link v-if="isAuthenticated" to="/dashboard">Dashboard</router-link>
     </div>
     <div v-if="isAuthenticated" class="navbar-profile">
-      <span class="username">Hello, {{ user.name }}</span>
+      <span class="username">Hello, {{ user }}</span>
       <div class="dropdown">
         <button class="dropbtn" @click="toggleDropdown">
           &#9776; {{ user.name }}
