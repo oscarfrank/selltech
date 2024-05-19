@@ -1,0 +1,10 @@
+{
+  "name": "used-devices-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "concurrently \"npm run dev --prefix backend\" \"yarn watch --cwd frontend\""
+  },
+  "devDependencies": {
+    "concurrently": "^6.0.0"
+  }
+}
